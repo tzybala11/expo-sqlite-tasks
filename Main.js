@@ -16,11 +16,35 @@ export default function Main() {
   const [tasks, setTasks] = useState([]);
   const [input, setInput] = useState('');
 
-  return (
-    <SafeAreaView style={styles.container}>
-      <Text style={styles.heading}>Expo + SQLite Task List</Text>
-    </SafeAreaView>
-  );
+return (
+  <SafeAreaView style={styles.container}>
+    <Text style={styles.heading}>Expo + SQLite Task List</Text>
+
+    <View style={styles.row}>
+      <TextInput
+        style={styles.input}
+        placeholder="New task..."
+        placeholderTextColor="#9ca3af"
+        value={input}
+        onChangeText={setInput}
+      />
+      <Button title="Add" onPress={addTask} />
+    </View>
+
+    <FlatList
+      data={tasks}
+      keyExtractor={(t) => t.id.toString()}
+      renderItem={renderItem}
+      ListEmptyComponent={
+        <Text style={styles.empty}>No tasks yet.</Text>
+      }
+    />
+
+    <Text style={styles.footer}>
+      Tap a task to toggle done • Tap ✕ to delete
+    </Text>
+  </SafeAreaView>
+);
 }
 
 const styles = StyleSheet.create({
