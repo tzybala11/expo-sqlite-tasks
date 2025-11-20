@@ -51,3 +51,15 @@ const loadTasks = async () => {
   setTasks(rows);
 };
 
+const addTask = async () => {
+  const trimmed = input.trim();
+  if (!trimmed) return;
+
+  await db.runAsync(
+    'INSERT INTO tasks (title, done) VALUES (?, 0);',
+    [trimmed]
+  );
+
+  setInput('');
+  loadTasks();
+};
