@@ -74,3 +74,8 @@ const toggleTask = async (id, done) => {
 
   loadTasks();
 };
+
+const deleteTask = async (id) => {
+  await db.runAsync('DELETE FROM tasks WHERE id = ?;', [id]);
+  loadTasks();
+};
