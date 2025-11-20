@@ -79,3 +79,20 @@ const deleteTask = async (id) => {
   await db.runAsync('DELETE FROM tasks WHERE id = ?;', [id]);
   loadTasks();
 };
+
+const renderItem = ({ item }) => (
+  <View style={styles.taskRow}>
+    <TouchableOpacity
+      style={{ flex: 1 }}
+      onPress={() => toggleTask(item.id, item.done)}
+    >
+      <Text style={[styles.taskText, item.done ? styles.done : null]}>
+        {item.title}
+      </Text>
+    </TouchableOpacity>
+
+    <TouchableOpacity onPress={() => deleteTask(item.id)}>
+      <Text style={styles.delete}>✕</Text>
+    </TouchableOpacity>
+  </View>
+);
