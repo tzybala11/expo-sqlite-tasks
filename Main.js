@@ -63,3 +63,14 @@ const addTask = async () => {
   setInput('');
   loadTasks();
 };
+
+const toggleTask = async (id, done) => {
+  const newDone = done ? 0 : 1;
+
+  await db.runAsync(
+    'UPDATE tasks SET done = ? WHERE id = ?;',
+    [newDone, id]
+  );
+
+  loadTasks();
+};
