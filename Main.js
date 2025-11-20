@@ -43,3 +43,11 @@ useEffect(() => {
 
   setup();
 }, []);
+
+const loadTasks = async () => {
+  const rows = await db.getAllAsync(
+    'SELECT * FROM tasks ORDER BY id DESC;'
+  );
+  setTasks(rows);
+};
+
